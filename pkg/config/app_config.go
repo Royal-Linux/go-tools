@@ -7,9 +7,7 @@
 // To see the final config after your user-specific options have been merged
 // with the defaults, go to the 'about' tab in the status panel.
 // Because of the way we merge your user config with the defaults you may need
-// to be careful: if for example you set a `commandTemplates:` yaml key but then
-// give it no child values, it will scrap all of the defaults and the app will
-// probably crash.
+// to be careful.
 package config
 
 import (
@@ -151,7 +149,7 @@ type AppConfig struct {
 }
 
 // NewAppConfig makes a new app config
-func NewAppConfig(name, version, commit, date string, buildSource string, debuggingFlag bool, composeFiles []string, projectDir string) (*AppConfig, error) {
+func NewAppConfig(name, version, commit, date string, buildSource string, debuggingFlag bool, projectDir string) (*AppConfig, error) {
 	configDir, err := findOrCreateConfigDir(name)
 	if err != nil {
 		return nil, err
@@ -160,11 +158,6 @@ func NewAppConfig(name, version, commit, date string, buildSource string, debugg
 	userConfig, err := loadUserConfigWithDefaults(configDir)
 	if err != nil {
 		return nil, err
-	}
-
-	// Pass compose files as individual -f flags to docker-compose
-	if len(composeFiles) > 0 {
-		userConfig.CommandTemplates.DockerCompose += " -f " + strings.Join(composeFiles, " -f ")
 	}
 
 	appConfig := &AppConfig{

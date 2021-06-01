@@ -49,7 +49,7 @@ func (app *App) KnownError(err error) (string, bool) {
 
 	mappings := []errorMapping{
 		{
-			originalError: "Got permission denied while trying to connect to the Docker daemon socket",
+			originalError: "Got permission denied while trying to load installer",
 			newError:      app.Tr.ErrorOccurred,
 		},
 	}
