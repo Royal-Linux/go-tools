@@ -1,4 +1,4 @@
-module github.com/Royal-Linux/hornero
+module github.com/Royal-Linux/go-tools
 
 go 1.12
 
